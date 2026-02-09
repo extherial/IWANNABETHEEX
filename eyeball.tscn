@@ -1,0 +1,87 @@
+[gd_scene load_steps=17 format=3 uid="uid://ctut50kch5b6p"]
+
+[ext_resource type="Texture2D" uid="uid://bctfexs0whtlw" path="res://sprites/flesh_guy/eyeball1.png" id="1_8gbdg"]
+[ext_resource type="Script" uid="uid://c00ecv8csxl8x" path="res://template_enemy.gd" id="1_l8ij0"]
+[ext_resource type="Texture2D" uid="uid://d2o61ev1gq0g5" path="res://sprites/flesh_guy/eyeball2.png" id="2_l8ij0"]
+[ext_resource type="Texture2D" uid="uid://cqgayygxkkwh6" path="res://sprites/flesh_guy/eyeball3.png" id="3_uog6o"]
+[ext_resource type="Texture2D" uid="uid://cjj5y6yu4evhk" path="res://sprites/flesh_guy/eyeball4.png" id="4_nafvf"]
+[ext_resource type="Texture2D" uid="uid://dlktk1wsr7sgw" path="res://sprites/flesh_guy/eyeball5.png" id="5_b2vp3"]
+[ext_resource type="Texture2D" uid="uid://0kufjtltcv2n" path="res://sprites/flesh_guy/eyeball6.png" id="6_idvts"]
+[ext_resource type="Texture2D" uid="uid://bhgp5h5yxjiws" path="res://sprites/flesh_guy/eyeball7.png" id="7_f6nmx"]
+[ext_resource type="Texture2D" uid="uid://bcpujlb3lin2u" path="res://sprites/flesh_guy/eyeball8.png" id="8_80amt"]
+[ext_resource type="Texture2D" uid="uid://cidudtiu0o4sr" path="res://sprites/flesh_guy/eyeball9.png" id="9_uqi53"]
+[ext_resource type="Texture2D" uid="uid://pfocdmcgjjwr" path="res://sprites/flesh_guy/eyeball10.png" id="10_b6s8n"]
+[ext_resource type="PackedScene" uid="uid://dtvwjx6bvipqb" path="res://scripts/Components/hitbox_component.tscn" id="11_cs4j3"]
+[ext_resource type="PackedScene" uid="uid://c6v8nsuhy3itf" path="res://scripts/Components/health_component.tscn" id="12_7qhuh"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8gbdg"]
+size = Vector2(16.215664, 21.743729)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ckdyh"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_8gbdg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_l8ij0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_uog6o")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_nafvf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_b2vp3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_idvts")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_f6nmx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_80amt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_uqi53")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_b6s8n")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 8.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_l8ij0"]
+size = Vector2(20.760956, 20.42479)
+
+[node name="Eyeball" type="CharacterBody2D" groups=["enemy"]]
+collision_layer = 25
+collision_mask = 25
+script = ExtResource("1_l8ij0")
+
+[node name="Hitbox" type="CollisionShape2D" parent="." groups=["enemy"]]
+position = Vector2(-0.7988033, 5.1477046)
+shape = SubResource("RectangleShape2D_8gbdg")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_ckdyh")
+animation = &"walk"
+frame_progress = 0.6253305
+
+[node name="HitboxComponent" parent="." node_paths=PackedStringArray("health_component") groups=["enemy"] instance=ExtResource("11_cs4j3")]
+visible = true
+collision_layer = 25
+collision_mask = 25
+health_component = NodePath("../HealthComponent")
+
+[node name="HurtBox" type="CollisionShape2D" parent="HitboxComponent" groups=["enemy"]]
+position = Vector2(0.24538422, 5.597118)
+shape = SubResource("RectangleShape2D_l8ij0")
+
+[node name="HealthComponent" parent="." instance=ExtResource("12_7qhuh")]
+
+[connection signal="body_entered" from="HitboxComponent" to="." method="_on_hitbox_component_body_entered"]

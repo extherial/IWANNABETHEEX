@@ -1,0 +1,39 @@
+[gd_scene load_steps=3 format=3 uid="uid://dwgcwov07trt8"]
+
+[ext_resource type="Texture2D" uid="uid://cx36daga52ywe" path="res://sprites/spike.png" id="1_8ryga"]
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_24b2x"]
+polygon = PackedVector2Array(-8.736195, 13.394963, 0.60919803, -9.704422, 9.921446, 13.394963)
+
+[node name="spike" type="Node2D"]
+scale = Vector2(2.5, 2.5)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = -2
+texture_filter = 1
+position = Vector2(-0.5463793, -15.976513)
+scale = Vector2(1.1309471, 0.99995345)
+texture = ExtResource("1_8ryga")
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="Sprite2D"]
+position = Vector2(0, 5.3500896)
+scale = Vector2(0.81407905, 0.6789539)
+occluder = SubResource("OccluderPolygon2D_24b2x")
+
+[node name="spike_hitbox" type="Area2D" parent="." groups=["spike"]]
+position = Vector2(0.0050408393, -6.648796)
+scale = Vector2(0.3, 0.309)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="spike_hitbox"]
+z_index = -2
+position = Vector2(17.000002, -7)
+scale = Vector2(3.8379807, 2.3946054)
+polygon = PackedVector2Array(-4.3946977, -14.985667, 3.9790545, 5.0544868, 3.9790545, 11.89948, -12.741957, 11.858244, -12.741957, 5.3018966)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="spike_hitbox"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="spike_hitbox/StaticBody2D"]
+z_index = -2
+position = Vector2(12.373255, -11.03675)
+scale = Vector2(2.3748243, 2.3329885)
+polygon = PackedVector2Array(-5.220266, -5.919976, 1.6000161, 7.720589, 2.7797341, 10.080027, -13.220266, 10.080027)

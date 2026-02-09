@@ -1,0 +1,46 @@
+[gd_scene load_steps=8 format=3 uid="uid://d2krgoo0gl6gv"]
+
+[ext_resource type="Script" uid="uid://c00ecv8csxl8x" path="res://template_enemy.gd" id="1_iry7s"]
+[ext_resource type="Texture2D" uid="uid://u7wqvc2skfm" path="res://sprites/speed.png" id="1_onvdr"]
+[ext_resource type="PackedScene" uid="uid://c6v8nsuhy3itf" path="res://scripts/Components/health_component.tscn" id="2_4qhj7"]
+[ext_resource type="PackedScene" uid="uid://dtvwjx6bvipqb" path="res://scripts/Components/hitbox_component.tscn" id="3_gsppk"]
+[ext_resource type="Script" uid="uid://cxq10wm685k1o" path="res://sprite_2d.gd" id="5_gsppk"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gsppk"]
+size = Vector2(18, 18)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_iry7s"]
+size = Vector2(20, 13)
+
+[node name="Enemy" type="CharacterBody2D"]
+collision_layer = 57
+collision_mask = 57
+script = ExtResource("1_iry7s")
+
+[node name="Hurtbox" type="CollisionShape2D" parent="."]
+position = Vector2(0, -2)
+shape = SubResource("RectangleShape2D_gsppk")
+
+[node name="HealthComponent" parent="." instance=ExtResource("2_4qhj7")]
+
+[node name="HitboxComponent" parent="." node_paths=PackedStringArray("health_component") groups=["enemy"] instance=ExtResource("3_gsppk")]
+visible = true
+health_component = NodePath("../HealthComponent")
+
+[node name="Hitbox" type="CollisionShape2D" parent="HitboxComponent"]
+position = Vector2(0, 0.5)
+shape = SubResource("RectangleShape2D_iry7s")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(0.9999999, 2.3841858e-07)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("1_onvdr")
+script = ExtResource("5_gsppk")
+
+[node name="Flash" type="Timer" parent="Sprite2D"]
+wait_time = 0.05
+one_shot = true
+
+[connection signal="enemy_damaged" from="HitboxComponent" to="Sprite2D" method="_on_hitbox_component_enemy_damaged"]
+[connection signal="timeout" from="Sprite2D/Flash" to="Sprite2D" method="_on_flash_timeout"]

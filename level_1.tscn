@@ -1,0 +1,85 @@
+[gd_scene load_steps=10 format=3 uid="uid://brkp1xmcc5vha"]
+
+[ext_resource type="Texture2D" uid="uid://bkvxh7ee0b1i8" path="res://sprites/ground_texture1.png" id="1_hbghi"]
+[ext_resource type="Texture2D" uid="uid://cl8obwbhwneha" path="res://sprites/ground_texture2.png" id="2_hn12h"]
+[ext_resource type="PackedScene" uid="uid://q8r32048n80s" path="res://main_player.tscn" id="3_hn12h"]
+[ext_resource type="PackedScene" uid="uid://bwr1egrmcuiwk" path="res://scripts/Components/spawn_block.tscn" id="3_rka8t"]
+[ext_resource type="PackedScene" uid="uid://e2eyyfevcqpl" path="res://scripts/Components/enemy_spawner.tscn" id="4_ihfcg"]
+[ext_resource type="PackedScene" uid="uid://dwgcwov07trt8" path="res://scripts/spike.tscn" id="6_5hph3"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ihfcg"]
+size = Vector2(32, 32)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_5hph3"]
+polygon = PackedVector2Array(0, 0, 32, 0, 32, 32, 0, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rka8t"]
+size = Vector2(576, 60)
+
+[node name="Level 1" type="Node"]
+
+[node name="Stage" type="Node" parent="."]
+
+[node name="grass" type="TextureRect" parent="Stage" groups=["ground"]]
+z_index = -3
+texture_filter = 1
+offset_left = -576.0
+offset_top = 248.0
+offset_right = -544.0
+offset_bottom = 280.0
+scale = Vector2(2, 2)
+texture = ExtResource("1_hbghi")
+stretch_mode = 1
+metadata/_edit_group_ = true
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Stage/grass" groups=["ground"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Stage/grass/StaticBody2D" groups=["ground"]]
+position = Vector2(16, 16)
+shape = SubResource("RectangleShape2D_ihfcg")
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="Stage/grass"]
+occluder = SubResource("OccluderPolygon2D_5hph3")
+
+[node name="dirt" type="TextureRect" parent="Stage" groups=["ground"]]
+z_index = -3
+texture_filter = 1
+offset_left = -576.0
+offset_top = 312.0
+offset_bottom = 372.0
+scale = Vector2(2, 2)
+texture = ExtResource("2_hn12h")
+stretch_mode = 1
+metadata/_edit_group_ = true
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Stage/dirt" groups=["ground"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Stage/dirt/StaticBody2D" groups=["ground"]]
+position = Vector2(288, 30)
+shape = SubResource("RectangleShape2D_rka8t")
+
+[node name="Spawn_block" parent="Stage" instance=ExtResource("3_rka8t")]
+position = Vector2(201, 160)
+
+[node name="Main" parent="." instance=ExtResource("3_hn12h")]
+
+[node name="Spawn_position" type="Marker2D" parent="Main" groups=["spawn_point"]]
+position = Vector2(-288, 40)
+
+[node name="Speed_spawner" parent="." instance=ExtResource("4_ihfcg")]
+
+[node name="Marker2D" type="Marker2D" parent="Speed_spawner"]
+position = Vector2(-120, 136)
+
+[node name="Marker2D2" type="Marker2D" parent="Speed_spawner"]
+position = Vector2(464, 200)
+
+[node name="spike3" parent="." instance=ExtResource("6_5hph3")]
+position = Vector2(142.44115, 247.55888)
+
+[node name="spike" parent="." instance=ExtResource("6_5hph3")]
+position = Vector2(63.970238, 247.55885)
+
+[node name="spike2" parent="." instance=ExtResource("6_5hph3")]
+position = Vector2(104.65404, 135.31514)
+rotation = 3.1415927

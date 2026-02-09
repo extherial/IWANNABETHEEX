@@ -1,0 +1,43 @@
+[gd_scene load_steps=6 format=3 uid="uid://c3m7efkbadvrf"]
+
+[ext_resource type="Texture2D" uid="uid://c16786cbueck4" path="res://sprites/blood.png" id="1_44s4y"]
+[ext_resource type="Script" uid="uid://cjb0esq8x5ubs" path="res://blood.gd" id="2_6b75d"]
+
+[sub_resource type="Gradient" id="Gradient_6b75d"]
+offsets = PackedFloat32Array(0, 0.7077922, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0.6313726, 0.6313726, 0.6313726, 1, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_7d1fo"]
+gradient = SubResource("Gradient_6b75d")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_44s4y"]
+particle_flag_disable_z = true
+emission_shape_offset = Vector3(0, 3, 0)
+direction = Vector3(0, -1, 0)
+spread = 33.0
+flatness = 0.61
+initial_velocity_min = 65.13
+initial_velocity_max = 142.42
+angular_velocity_min = -200.00002
+angular_velocity_max = 199.99998
+radial_velocity_min = -22.990023
+radial_velocity_max = 68.95998
+gravity = Vector3(0, 350, 0)
+color_ramp = SubResource("GradientTexture1D_7d1fo")
+hue_variation_min = -2.2351742e-08
+hue_variation_max = -2.2351742e-08
+collision_mode = 1
+collision_friction = 1.0
+collision_bounce = 0.8
+
+[node name="GPUParticles2D" type="GPUParticles2D"]
+texture_filter = 1
+emitting = false
+amount = 80
+texture = ExtResource("1_44s4y")
+lifetime = 6.0
+one_shot = true
+explosiveness = 1.0
+fixed_fps = 60
+process_material = SubResource("ParticleProcessMaterial_44s4y")
+script = ExtResource("2_6b75d")
