@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://bwr1egrmcuiwk"]
 
-[ext_resource type="Script" uid="uid://vv1en4rcxthi" path="res://spawn_block.gd" id="1_3vmpx"]
-[ext_resource type="Script" uid="uid://cc4mfppomoepj" path="res://scripts/Components/spawn_block_hit_box.gd" id="2_3vmpx"]
+[ext_resource type="Script" uid="uid://vv1en4rcxthi" path="res://scripts/spawn_block.gd" id="1_3vmpx"]
+[ext_resource type="Script" uid="uid://cc4mfppomoepj" path="res://scenes/Components/spawn_block_hit_box.gd" id="2_3vmpx"]
 [ext_resource type="Texture2D" uid="uid://dab5akdmvwvr2" path="res://icon.svg" id="3_h7hwq"]
 [ext_resource type="AudioStream" uid="uid://btcjx0wmxh1g1" path="res://sounds/test - Track 7.wav" id="4_mr4yg"]
 

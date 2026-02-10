@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://djxjnjwqk0ryo"]
 
-[ext_resource type="Script" uid="uid://ck5xw5h1blyco" path="res://cutscene_trigger.gd" id="1_kj8u1"]
-[ext_resource type="PackedScene" uid="uid://dtvwjx6bvipqb" path="res://scripts/Components/hitbox_component.tscn" id="2_6bolt"]
+[ext_resource type="Script" uid="uid://ck5xw5h1blyco" path="res://scripts/cutscene_trigger.gd" id="1_kj8u1"]
+[ext_resource type="PackedScene" uid="uid://dtvwjx6bvipqb" path="res://scenes/Components/hitbox_component.tscn" id="2_6bolt"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kj8u1"]
 size = Vector2(15.036194, 31.65514)

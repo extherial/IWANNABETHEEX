@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://c3m7efkbadvrf"]
 
-[ext_resource type="Texture2D" uid="uid://c16786cbueck4" path="res://sprites/blood.png" id="1_44s4y"]
-[ext_resource type="Script" uid="uid://cjb0esq8x5ubs" path="res://blood.gd" id="2_6b75d"]
+[ext_resource type="Texture2D" uid="uid://c16786cbueck4" path="res://sprites/player_sprites/blood.png" id="1_44s4y"]
+[ext_resource type="Script" uid="uid://cjb0esq8x5ubs" path="res://scripts/blood.gd" id="2_6b75d"]
 
 [sub_resource type="Gradient" id="Gradient_6b75d"]
 offsets = PackedFloat32Array(0, 0.7077922, 1)

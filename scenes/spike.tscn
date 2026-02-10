@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://dwgcwov07trt8"]
 
-[ext_resource type="Texture2D" uid="uid://cx36daga52ywe" path="res://sprites/spike.png" id="1_8ryga"]
+[ext_resource type="Texture2D" uid="uid://cx36daga52ywe" path="res://sprites/tiles/spike.png" id="1_8ryga"]
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_24b2x"]
 polygon = PackedVector2Array(-8.736195, 13.394963, 0.60919803, -9.704422, 9.921446, 13.394963)

@@ -1,22 +1,22 @@
 [gd_scene load_steps=34 format=4 uid="uid://cm8nbxqbhhum7"]
 
-[ext_resource type="Script" uid="uid://r4shk8ysn6mk" path="res://player_reset_handler.gd" id="1_d63w1"]
-[ext_resource type="PackedScene" uid="uid://q8r32048n80s" path="res://main_player.tscn" id="1_k3ug5"]
+[ext_resource type="Script" uid="uid://r4shk8ysn6mk" path="res://scripts/Globals/player_reset_handler.gd" id="1_d63w1"]
+[ext_resource type="PackedScene" uid="uid://q8r32048n80s" path="res://scenes/main_player.tscn" id="1_k3ug5"]
 [ext_resource type="TileSet" uid="uid://cs1qhcsqssvde" path="res://stage_1.tres" id="1_tai8l"]
-[ext_resource type="Texture2D" uid="uid://bb4j0ns55fyc8" path="res://sprites/triple_spike.png" id="2_i7m2u"]
+[ext_resource type="Texture2D" uid="uid://bb4j0ns55fyc8" path="res://sprites/tiles/triple_spike.png" id="2_i7m2u"]
 [ext_resource type="Texture2D" uid="uid://htc0iehth35t" path="res://sprites/body parts/background2.png" id="2_lce2v"]
-[ext_resource type="Texture2D" uid="uid://ov418a6n8st1" path="res://sprites/spike_fixed.png" id="2_u5qfc"]
-[ext_resource type="Texture2D" uid="uid://dai4uecotg6qx" path="res://sprites/skinny spike.png" id="3_af3qs"]
-[ext_resource type="PackedScene" uid="uid://bwr1egrmcuiwk" path="res://scripts/Components/spawn_block.tscn" id="4_631su"]
-[ext_resource type="Texture2D" uid="uid://cfwcfmolptnn8" path="res://star.png" id="4_bvuje"]
-[ext_resource type="Texture2D" uid="uid://cyrbk5i0c3elw" path="res://sprites/single spike.png" id="4_d63w1"]
-[ext_resource type="Texture2D" uid="uid://dspehytkm5ha2" path="res://sprites/half_spike.png" id="5_r8jfd"]
-[ext_resource type="PackedScene" uid="uid://e2eyyfevcqpl" path="res://scripts/Components/enemy_spawner.tscn" id="7_vn1b6"]
-[ext_resource type="PackedScene" uid="uid://cgftkubyqlahh" path="res://hampter.tscn" id="8_j81dk"]
-[ext_resource type="Script" uid="uid://ba0b2ol5epg3w" path="res://gpu_particles_2d.gd" id="10_ep5ry"]
-[ext_resource type="PackedScene" uid="uid://djxjnjwqk0ryo" path="res://cutscene_trigger.tscn" id="13_af3qs"]
+[ext_resource type="Texture2D" uid="uid://ov418a6n8st1" path="res://sprites/tiles/spike_fixed.png" id="2_u5qfc"]
+[ext_resource type="Texture2D" uid="uid://dai4uecotg6qx" path="res://sprites/tiles/skinny spike.png" id="3_af3qs"]
+[ext_resource type="PackedScene" uid="uid://bwr1egrmcuiwk" path="res://scenes/Components/spawn_block.tscn" id="4_631su"]
+[ext_resource type="Texture2D" uid="uid://cfwcfmolptnn8" path="res://sprites/misc/star.png" id="4_bvuje"]
+[ext_resource type="Texture2D" uid="uid://cyrbk5i0c3elw" path="res://sprites/tiles/single spike.png" id="4_d63w1"]
+[ext_resource type="Texture2D" uid="uid://dspehytkm5ha2" path="res://sprites/tiles/half_spike.png" id="5_r8jfd"]
+[ext_resource type="PackedScene" uid="uid://e2eyyfevcqpl" path="res://scenes/Components/enemy_spawner.tscn" id="7_vn1b6"]
+[ext_resource type="PackedScene" uid="uid://cgftkubyqlahh" path="res://scenes/hampter.tscn" id="8_j81dk"]
+[ext_resource type="Script" uid="uid://ba0b2ol5epg3w" path="res://scripts/gpu_particles_2d.gd" id="10_ep5ry"]
+[ext_resource type="PackedScene" uid="uid://djxjnjwqk0ryo" path="res://scenes/cutscene_trigger.tscn" id="13_af3qs"]
 [ext_resource type="FontFile" uid="uid://em5uoda0vvyx" path="res://fonts/PixelOperatorHBSC.ttf" id="15_r8jfd"]
-[ext_resource type="PackedScene" uid="uid://ctut50kch5b6p" path="res://eyeball.tscn" id="16_irv12"]
+[ext_resource type="PackedScene" uid="uid://ctut50kch5b6p" path="res://scenes/eyeball.tscn" id="16_irv12"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ep5ry"]
 texture = ExtResource("2_i7m2u")
@@ -186,10 +186,11 @@ position = Vector2(1161.8208, 1533.8002)
 amount = 150
 texture = ExtResource("4_bvuje")
 lifetime = 8.0
-preprocess = 20.0
+preprocess = 2.0
 speed_scale = 0.8
 use_fixed_seed = true
 seed = 2421813649
+local_coords = true
 process_material = SubResource("ParticleProcessMaterial_bvuje")
 script = ExtResource("10_ep5ry")
 

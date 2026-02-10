@@ -10,17 +10,17 @@ config_version=5
 
 [application]
 
-config/name="third game"
+config/name="IWANNABETHEEX"
 run/main_scene="uid://cm8nbxqbhhum7"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
 
 [autoload]
 
-SpawnManager="*res://Spawn_Manager.gd"
-CameraBounds="*res://scripts/Components/CameraBounds.gd"
-CutsceneHandler="*res://sprites/CutsceneHandler.gd"
-PlayerDeathSignal="*res://player_death_signal.gd"
+SpawnManager="*res://scripts/Globals/Spawn_Manager.gd"
+CameraBounds="*res://scripts/Globals/CameraBounds.gd"
+CutsceneHandler="*res://scripts/Globals/CutsceneHandler.gd"
+PlayerDeathSignal="*res://scripts/Globals/player_death_signal.gd"
 
 [display]
 

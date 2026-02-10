@@ -31,10 +31,10 @@ func _physics_process(delta: float) -> void:
 		
 	if(moving_right):
 		velocity.x = 50
-		#$AnimatedSprite2D.flip_h = true
+		$AnimatedSprite2D.flip_h = true
 	else:
 		velocity.x = -50
-		#$AnimatedSprite2D.flip_h = false
+		$AnimatedSprite2D.flip_h = false
 	
 	move_and_slide()
 	pass

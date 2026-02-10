@@ -1,7 +1,7 @@
 [gd_scene load_steps=17 format=3 uid="uid://ctut50kch5b6p"]
 
 [ext_resource type="Texture2D" uid="uid://bctfexs0whtlw" path="res://sprites/flesh_guy/eyeball1.png" id="1_8gbdg"]
-[ext_resource type="Script" uid="uid://c00ecv8csxl8x" path="res://template_enemy.gd" id="1_l8ij0"]
+[ext_resource type="Script" uid="uid://c00ecv8csxl8x" path="res://scripts/template_enemy.gd" id="1_l8ij0"]
 [ext_resource type="Texture2D" uid="uid://d2o61ev1gq0g5" path="res://sprites/flesh_guy/eyeball2.png" id="2_l8ij0"]
 [ext_resource type="Texture2D" uid="uid://cqgayygxkkwh6" path="res://sprites/flesh_guy/eyeball3.png" id="3_uog6o"]
 [ext_resource type="Texture2D" uid="uid://cjj5y6yu4evhk" path="res://sprites/flesh_guy/eyeball4.png" id="4_nafvf"]
@@ -11,8 +11,8 @@
 [ext_resource type="Texture2D" uid="uid://bcpujlb3lin2u" path="res://sprites/flesh_guy/eyeball8.png" id="8_80amt"]
 [ext_resource type="Texture2D" uid="uid://cidudtiu0o4sr" path="res://sprites/flesh_guy/eyeball9.png" id="9_uqi53"]
 [ext_resource type="Texture2D" uid="uid://pfocdmcgjjwr" path="res://sprites/flesh_guy/eyeball10.png" id="10_b6s8n"]
-[ext_resource type="PackedScene" uid="uid://dtvwjx6bvipqb" path="res://scripts/Components/hitbox_component.tscn" id="11_cs4j3"]
-[ext_resource type="PackedScene" uid="uid://c6v8nsuhy3itf" path="res://scripts/Components/health_component.tscn" id="12_7qhuh"]
+[ext_resource type="PackedScene" uid="uid://dtvwjx6bvipqb" path="res://scenes/Components/hitbox_component.tscn" id="11_cs4j3"]
+[ext_resource type="PackedScene" uid="uid://c6v8nsuhy3itf" path="res://scenes/Components/health_component.tscn" id="12_7qhuh"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8gbdg"]
 size = Vector2(16.215664, 21.743729)
@@ -64,10 +64,12 @@ collision_mask = 25
 script = ExtResource("1_l8ij0")
 
 [node name="Hitbox" type="CollisionShape2D" parent="." groups=["enemy"]]
-position = Vector2(-0.7988033, 5.1477046)
+position = Vector2(-1.1673412, 2.9364772)
+scale = Vector2(0.6104726, 0.7489299)
 shape = SubResource("RectangleShape2D_8gbdg")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.75, 0.75)
 sprite_frames = SubResource("SpriteFrames_ckdyh")
 animation = &"walk"
 frame_progress = 0.6253305
@@ -79,9 +81,12 @@ collision_mask = 25
 health_component = NodePath("../HealthComponent")
 
 [node name="HurtBox" type="CollisionShape2D" parent="HitboxComponent" groups=["enemy"]]
-position = Vector2(0.24538422, 5.597118)
+position = Vector2(-0.12315369, 3.3858905)
+rotation = 1.5707964
+scale = Vector2(0.61344314, 0.7489299)
 shape = SubResource("RectangleShape2D_l8ij0")
 
 [node name="HealthComponent" parent="." instance=ExtResource("12_7qhuh")]
+MAX_HEALTH = 1.0
 
 [connection signal="body_entered" from="HitboxComponent" to="." method="_on_hitbox_component_body_entered"]

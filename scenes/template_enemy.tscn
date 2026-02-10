@@ -1,10 +1,10 @@
 [gd_scene load_steps=8 format=3 uid="uid://d2krgoo0gl6gv"]
 
-[ext_resource type="Script" uid="uid://c00ecv8csxl8x" path="res://template_enemy.gd" id="1_iry7s"]
-[ext_resource type="Texture2D" uid="uid://u7wqvc2skfm" path="res://sprites/speed.png" id="1_onvdr"]
-[ext_resource type="PackedScene" uid="uid://c6v8nsuhy3itf" path="res://scripts/Components/health_component.tscn" id="2_4qhj7"]
-[ext_resource type="PackedScene" uid="uid://dtvwjx6bvipqb" path="res://scripts/Components/hitbox_component.tscn" id="3_gsppk"]
-[ext_resource type="Script" uid="uid://cxq10wm685k1o" path="res://sprite_2d.gd" id="5_gsppk"]
+[ext_resource type="Script" uid="uid://c00ecv8csxl8x" path="res://scripts/template_enemy.gd" id="1_iry7s"]
+[ext_resource type="Texture2D" uid="uid://u7wqvc2skfm" path="res://sprites/misc/speed.png" id="1_onvdr"]
+[ext_resource type="PackedScene" uid="uid://c6v8nsuhy3itf" path="res://scenes/Components/health_component.tscn" id="2_4qhj7"]
+[ext_resource type="PackedScene" uid="uid://dtvwjx6bvipqb" path="res://scenes/Components/hitbox_component.tscn" id="3_gsppk"]
+[ext_resource type="Script" uid="uid://cxq10wm685k1o" path="res://scripts/sprite_2d.gd" id="5_gsppk"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gsppk"]
 size = Vector2(18, 18)

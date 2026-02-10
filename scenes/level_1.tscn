@@ -1,11 +1,11 @@
 [gd_scene load_steps=10 format=3 uid="uid://brkp1xmcc5vha"]
 
-[ext_resource type="Texture2D" uid="uid://bkvxh7ee0b1i8" path="res://sprites/ground_texture1.png" id="1_hbghi"]
-[ext_resource type="Texture2D" uid="uid://cl8obwbhwneha" path="res://sprites/ground_texture2.png" id="2_hn12h"]
-[ext_resource type="PackedScene" uid="uid://q8r32048n80s" path="res://main_player.tscn" id="3_hn12h"]
-[ext_resource type="PackedScene" uid="uid://bwr1egrmcuiwk" path="res://scripts/Components/spawn_block.tscn" id="3_rka8t"]
-[ext_resource type="PackedScene" uid="uid://e2eyyfevcqpl" path="res://scripts/Components/enemy_spawner.tscn" id="4_ihfcg"]
-[ext_resource type="PackedScene" uid="uid://dwgcwov07trt8" path="res://scripts/spike.tscn" id="6_5hph3"]
+[ext_resource type="Texture2D" uid="uid://bkvxh7ee0b1i8" path="res://sprites/tiles/ground_texture1.png" id="1_hbghi"]
+[ext_resource type="Texture2D" uid="uid://cl8obwbhwneha" path="res://sprites/tiles/ground_texture2.png" id="2_hn12h"]
+[ext_resource type="PackedScene" uid="uid://q8r32048n80s" path="res://scenes/main_player.tscn" id="3_hn12h"]
+[ext_resource type="PackedScene" uid="uid://bwr1egrmcuiwk" path="res://scenes/Components/spawn_block.tscn" id="3_rka8t"]
+[ext_resource type="PackedScene" uid="uid://e2eyyfevcqpl" path="res://scenes/Components/enemy_spawner.tscn" id="4_ihfcg"]
+[ext_resource type="PackedScene" uid="uid://dwgcwov07trt8" path="res://scenes/spike.tscn" id="6_5hph3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ihfcg"]
 size = Vector2(32, 32)

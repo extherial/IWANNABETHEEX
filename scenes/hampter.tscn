@@ -1,8 +1,8 @@
 [gd_scene load_steps=14 format=3 uid="uid://cgftkubyqlahh"]
 
-[ext_resource type="Script" uid="uid://d1abvkdlhul6p" path="res://hampter.gd" id="1_5dfyc"]
-[ext_resource type="PackedScene" uid="uid://dtvwjx6bvipqb" path="res://scripts/Components/hitbox_component.tscn" id="1_q6ty7"]
-[ext_resource type="PackedScene" uid="uid://c6v8nsuhy3itf" path="res://scripts/Components/health_component.tscn" id="2_5dfyc"]
+[ext_resource type="Script" uid="uid://d1abvkdlhul6p" path="res://scripts/hampter.gd" id="1_5dfyc"]
+[ext_resource type="PackedScene" uid="uid://dtvwjx6bvipqb" path="res://scenes/Components/hitbox_component.tscn" id="1_q6ty7"]
+[ext_resource type="PackedScene" uid="uid://c6v8nsuhy3itf" path="res://scenes/Components/health_component.tscn" id="2_5dfyc"]
 [ext_resource type="Texture2D" uid="uid://bacdfkckwe6rq" path="res://sprites/hampter/hampter1.png" id="3_qkydm"]
 [ext_resource type="Texture2D" uid="uid://bd2gyswuxmwa0" path="res://sprites/hampter/hampter2.png" id="4_6lape"]
 [ext_resource type="Texture2D" uid="uid://duelm2128drfl" path="res://sprites/hampter/hampter3.png" id="5_vvm3p"]

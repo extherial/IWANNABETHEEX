@@ -1,9 +1,9 @@
 [gd_scene load_steps=6 format=3 uid="uid://c2ugvkawfxpj6"]
 
-[ext_resource type="Script" uid="uid://c6mc8du73yhao" path="res://cat.gd" id="1_6fl1u"]
-[ext_resource type="PackedScene" uid="uid://c6v8nsuhy3itf" path="res://scripts/Components/health_component.tscn" id="2_w46py"]
-[ext_resource type="PackedScene" uid="uid://dtvwjx6bvipqb" path="res://scripts/Components/hitbox_component.tscn" id="3_2u0g4"]
-[ext_resource type="Texture2D" uid="uid://db1xy4dw7mgn8" path="res://sprites/pufferfish_1.png" id="4_w46py"]
+[ext_resource type="Script" uid="uid://c6mc8du73yhao" path="res://scripts/cat.gd" id="1_6fl1u"]
+[ext_resource type="PackedScene" uid="uid://c6v8nsuhy3itf" path="res://scenes/Components/health_component.tscn" id="2_w46py"]
+[ext_resource type="PackedScene" uid="uid://dtvwjx6bvipqb" path="res://scenes/Components/hitbox_component.tscn" id="3_2u0g4"]
+[ext_resource type="Texture2D" uid="uid://db1xy4dw7mgn8" path="res://sprites/misc/pufferfish_1.png" id="4_w46py"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_6fl1u"]
 radius = 7.0

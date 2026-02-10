@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://dtvwjx6bvipqb"]
 
-[ext_resource type="Script" uid="uid://orpwhsw04h2m" path="res://hitbox_component.gd" id="1_a4hc1"]
+[ext_resource type="Script" uid="uid://orpwhsw04h2m" path="res://scripts/hitbox_component.gd" id="1_a4hc1"]
 
 [node name="HitboxComponent" type="Area2D"]
 visible = false
