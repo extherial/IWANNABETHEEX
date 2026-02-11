@@ -64,7 +64,8 @@ func _physics_process(delta: float) -> void:
 			rotation += get_angle_to(player.position) * 5 * delta
 		
 		if(fly_bx):
-			rotation = random_direction
+			print("kys")
+			#rotation = random_direction
 		
 		if(kill_bx):
 			rotation += 20 * delta

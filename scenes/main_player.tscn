@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://q8r32048n80s"]
+[gd_scene load_steps=22 format=3 uid="uid://q8r32048n80s"]
 
 [ext_resource type="Script" uid="uid://btlofje5bj64p" path="res://scripts/main_player.gd" id="1_l2wx2"]
 [ext_resource type="Script" uid="uid://cvgpyi00t403o" path="res://scripts/character_body_2d.gd" id="1_mlqkk"]
@@ -12,6 +12,7 @@
 [ext_resource type="Script" uid="uid://2m0ut8g7bdib" path="res://scripts/camera_2d.gd" id="9_6fu54"]
 [ext_resource type="AudioStream" uid="uid://cp6okpkwkwghp" path="res://sounds/jump_1.wav" id="11_tqiyj"]
 [ext_resource type="AudioStream" uid="uid://dfe3ex52bree7" path="res://sounds/jump_2.wav" id="12_6fu54"]
+[ext_resource type="AudioStream" uid="uid://bdyf3vrv85tli" path="res://sounds/death sound.ogg" id="13_3oxqv"]
 
 [sub_resource type="Animation" id="Animation_0m3ev"]
 length = 0.001
@@ -144,15 +145,19 @@ scale = Vector2(0.1, 0.1)
 
 [node name="Player" type="CharacterBody2D" parent="Node2D" groups=["player"]]
 unique_name_in_owner = true
+z_index = 5
 scale = Vector2(0.8, 0.8)
-collision_layer = 185
-collision_mask = 185
+collision_layer = 248
+collision_mask = 248
 script = ExtResource("1_mlqkk")
-blood_scene = ExtResource("2_tqiyj")
 max_falling_speed = 300
+blood_scene = ExtResource("2_tqiyj")
+jump_pad_strength = -1000
+
+[node name="jump_pad_cooldown" type="Timer" parent="Node2D/Player"]
 
 [node name="Coyote_Time" type="Timer" parent="Node2D/Player"]
-wait_time = 0.05
+wait_time = 0.1
 one_shot = true
 
 [node name="HealthComponent" parent="Node2D/Player" instance=ExtResource("6_2yny2")]
@@ -199,6 +204,11 @@ stream = ExtResource("11_tqiyj")
 [node name="jump_2" type="AudioStreamPlayer2D" parent="Node2D/Player/Audio"]
 stream = ExtResource("12_6fu54")
 
+[node name="death_sound" type="AudioStreamPlayer2D" parent="Node2D/Player/Audio"]
+stream = ExtResource("13_3oxqv")
+volume_db = -3.005
+
+[connection signal="timeout" from="Node2D/Player/jump_pad_cooldown" to="Node2D/Player" method="_on_jump_pad_cooldown_timeout"]
 [connection signal="timeout" from="Node2D/Player/Coyote_Time" to="Node2D/Player" method="_on_coyote_time_timeout"]
 [connection signal="set_spawn" from="Node2D/Player/Gun_Controller" to="MainCam" method="_on_gun_controller_set_spawn"]
 [connection signal="area_entered" from="Node2D/Player/HitboxComponent" to="Node2D/Player" method="_on_hitbox_component_area_entered"]

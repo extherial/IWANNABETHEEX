@@ -2,119 +2,128 @@ extends CharacterBody2D
 
 class_name Player
 
+
+
+
+
+#region Movement
 const SPEED = 120.0
+var facing = 1
+#endregion
+
+#region Jump Variables
+var gravity_force = 0
 const JUMP_VELOCITY = -263
 const LOW_GRAVITY = 900
 const HIGH_GRAVITY = 1300
 const FALLING_GRAVITY = 1100
 var able_to_jump
-var gravity_force = 0
+var double_jump = false
+@export var max_falling_speed := 1200
+#endregion
 
-var can_dash = false
-var sprint_speed = 0
+#region Health and Death
 const PLAYERHEALTH = 10
 var health
-var facing = 1
-var double_jump = false
 var already_dead = false
 @export var blood_scene: PackedScene
-@export var max_falling_speed := 1200
-
+#endregion
 
 var in_cutscene = false
 
 
+
+
+
+
+#called on start
 func _ready() -> void:
 	$AnimationPlayer.speed_scale = 1.5
 	health = PLAYERHEALTH
 	show()
 	pass
-
+#makes jumping consistent and not janky
 func can_jump():
 	if(is_on_floor()):
+		double_jump = true
 		able_to_jump = true
-	else:
-		await get_tree().create_timer(0.1).timeout
-		able_to_jump = false
+		$Coyote_Time.start()
+	if(Input.is_action_just_pressed("shoot") && !already_dead):
+		$Gun_Controller.shoot(facing)
+
+#checks for basic inputs
+func _input(event: InputEvent) -> void:
+	if(event.is_action_pressed("Respawn")):
+		respawn()
+	if(event.is_action_pressed("down")):
+		set_collision_mask_value(5, false)
+		print("false")
+	elif(event.is_action_released("down")):
+		print("true")
+		set_collision_mask_value(5, true)
+	pass
+
 
 func _physics_process(delta: float) -> void:
 	can_jump()
-	if(Input.is_action_just_pressed("Respawn")):
-		respawn()
-	
 	if(!already_dead):
-		if(Input.is_action_just_pressed("shoot")):
-			$Gun_Controller.shoot(facing)
-		
-		if(sprint_speed > 0):
-			sprint_speed -= 3500 * delta
-			velocity.y = 0
-			
-		if(sprint_speed < 0):
-			sprint_speed = 0
-		if(sprint_speed == 0 && is_on_floor()):
-			can_dash = true
-		# Handle jump.
+#region Jump Logic + Gravity
+		if(!is_on_floor() && double_jump && Input.is_action_just_pressed("jump") && !able_to_jump):
+				$Audio/jump_1.play()
+				print("double jump")
+				velocity.y = JUMP_VELOCITY / 1.2
+				double_jump = false
 		if Input.is_action_just_pressed("jump"):
 			if(able_to_jump):
 				$Audio/jump_2.play()
-				double_jump = true
 				velocity.y = JUMP_VELOCITY
-			elif(double_jump):
-				$Audio/jump_1.play()
-				velocity.y = JUMP_VELOCITY / 1.2
-				double_jump = false
-				
+				able_to_jump = false
+		#MAIN FUNCTIONALITY OF GRAVITY AND ITS RELATION TO JUMPING
 		if (velocity.y < 0):
 			if(Input.is_action_pressed("jump")):
 				$AnimationPlayer.play("jump")
 				gravity_force = LOW_GRAVITY
 			else: #when you let go of jump
 				gravity_force = HIGH_GRAVITY #sets gravity to a sharp high
-	#stops setting gravity to high when your upward velocity is 0
 		else:
 			gravity_force = FALLING_GRAVITY
-			
 			if(not is_on_floor()):
 				$AnimationPlayer.play("fall")
-		 
-		
 		if(velocity.y < max_falling_speed):
 			velocity.y += gravity_force * delta
-		
-		
-		
-		# Get the input direction and handle the movement/deceleration.
-		# As good practice, you should replace UI actions with custom gameplay actions.
+#endregion
+
+#region Moevement and Directionality
 		var direction := Input.get_axis("left", "right")
 		if is_on_floor():
 			if direction:
 				$AnimationPlayer.play("walk")
 			else:
 				$AnimationPlayer.play("idle")
-		
-		
-
-		
 		if direction == -1:
 			#$animation.rotation_degrees = 180
 			$animation.flip_h = true
 			facing = -1
-			
 		if direction == 1:
 			facing = 1
 			$animation.flip_h = false
 		if direction:
-			velocity.x = direction * SPEED + (sprint_speed * direction)
+			velocity.x = direction * SPEED 
 		else:
-			velocity.x = move_toward(velocity.x, 0, SPEED + sprint_speed)
+			velocity.x = move_toward(velocity.x, 0, SPEED)
+#endregion
+
+#region Outside interactions: checking for spikes, jump pads, etc
 		if(!in_cutscene):
 			move_and_slide()
 		for i in get_slide_collision_count():
 			var collision = get_slide_collision(i)
+			#Spike Layer 6
 			if(PhysicsServer2D.body_get_collision_mask(collision.get_collider_rid()) == 32):
 				death()
-			
+#endregion
+
+#handles logic for when player hits "R" to respawn
 func respawn():
 	CutsceneHandler.set_cutscene("none")
 	position = SpawnManager.get_spawn()
@@ -126,8 +135,9 @@ func respawn():
 	show()
 	PlayerDeathSignal.emit_signal("screen_update")
 
-
+#handles the logic immediately after dying
 func death():
+	$Audio/death_sound.play()
 	PlayerDeathSignal.emit_signal("player_death")
 	CutsceneHandler.set_cutscene("none")
 	$HitboxComponent.set_monitoring(false)
@@ -145,6 +155,8 @@ func death():
 	#particle explosion of blood
 	#sound effect
 	pass
+
+#handles all the collision check logic for enemies and cutscenes
 func _on_hitbox_component_area_entered(area: Area2D) -> void:
 	if area.is_in_group("enemy") || area.is_in_group("spike") :
 		if(!already_dead):
@@ -154,8 +166,17 @@ func _on_hitbox_component_area_entered(area: Area2D) -> void:
 		self.modulate = Color(0.232, 0.27, 0.287, 1.0)
 	pass # Replace with function body.
 
+#end of cutscene logic (JANKY and should be CHANGED)
 func _on_hitbox_component_area_exited(area: Area2D) -> void:
 	if area.is_in_group("cutscene_trigger"):
 		in_cutscene = false
 		self.modulate = Color(1, 1, 1, 1.0)
 	pass # Replace with function body.
+
+#Handles Coyote Time
+func _on_coyote_time_timeout() -> void:
+	able_to_jump = false
+	pass # Replace with function body.
+
+#jump pad timer and falloff to avoid LAUNCHING you; 
+#should probably look into a better implementation

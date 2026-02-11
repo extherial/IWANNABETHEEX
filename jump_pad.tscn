@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://bj3lwt83rkfcj"]
+
+[ext_resource type="Script" uid="uid://c8h1jfm0hrbxe" path="res://jump_pad.gd" id="1_cysje"]
+[ext_resource type="Texture2D" uid="uid://bdqddub7hn58s" path="res://sprites/tiles/jump pad/jump_pad-Sheet.png" id="2_dd87t"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cysje"]
+size = Vector2(13.901667, 6)
+
+[node name="jump_pad" type="Node2D"]
+script = ExtResource("1_cysje")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -8)
+texture = ExtResource("2_dd87t")
+hframes = 8
+
+[node name="jump_pad_area" type="Area2D" parent="."]
+collision_layer = 0
+
+[node name="hitbox" type="CollisionShape2D" parent="jump_pad_area"]
+position = Vector2(0.14770412, -1.083971)
+shape = SubResource("RectangleShape2D_cysje")
+
+[connection signal="area_entered" from="jump_pad_area" to="." method="_on_jump_pad_area_area_entered"]

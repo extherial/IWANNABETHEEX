@@ -1,19 +1,20 @@
-[gd_scene load_steps=7 format=3 uid="uid://bwr1egrmcuiwk"]
+[gd_scene load_steps=6 format=3 uid="uid://bwr1egrmcuiwk"]
 
 [ext_resource type="Script" uid="uid://vv1en4rcxthi" path="res://scripts/spawn_block.gd" id="1_3vmpx"]
 [ext_resource type="Script" uid="uid://cc4mfppomoepj" path="res://scenes/Components/spawn_block_hit_box.gd" id="2_3vmpx"]
 [ext_resource type="Texture2D" uid="uid://dab5akdmvwvr2" path="res://icon.svg" id="3_h7hwq"]
-[ext_resource type="AudioStream" uid="uid://btcjx0wmxh1g1" path="res://sounds/test - Track 7.wav" id="4_mr4yg"]
+[ext_resource type="AudioStream" uid="uid://c316si17jw4nc" path="res://sounds/test - Track 9.wav" id="4_mj5wq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mr4yg"]
 size = Vector2(26.66656, 26.66656)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_yv4ld"]
-size = Vector2(13.33328, 13.33328)
-
 [node name="Spawn_block" type="Node2D"]
 scale = Vector2(0.6000024, 0.6000024)
 script = ExtResource("1_3vmpx")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
 
 [node name="Spawn_block_hit_box" type="Area2D" parent="."]
 z_index = 5
@@ -28,14 +29,8 @@ position = Vector2(-5.364418e-07, -5.364418e-07)
 scale = Vector2(0.2083325, 0.2083325)
 texture = ExtResource("3_h7hwq")
 
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(2.9802203e-07, -3.973627e-07)
-scale = Vector2(2, 2)
-shape = SubResource("RectangleShape2D_yv4ld")
-
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("4_mr4yg")
+stream = ExtResource("4_mj5wq")
 
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="area_entered" from="Spawn_block_hit_box" to="." method="_on_spawn_block_hit_box_area_entered"]
