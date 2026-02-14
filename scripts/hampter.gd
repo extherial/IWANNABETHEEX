@@ -17,6 +17,8 @@ var player_alive = true
 var tween
 var color_tween
 func _ready() -> void:
+	$HitboxComponent.set_monitoring(false)
+	$HitboxComponent.monitorable = false
 	var handler = get_tree().get_first_node_in_group("Reset_Handler")
 	handler.connect("DEATH", death)
 	hide()
@@ -38,6 +40,8 @@ func spawn() -> void:
 		reset_behaviors()
 		move_toward_player_bx = true
 		tracking_bx = true
+		$HitboxComponent.set_monitoring(true)
+		$HitboxComponent.monitorable = true
 func _physics_process(delta: float) -> void:
 	if(CutsceneHandler.get_cutscene() == "hamster") && !spawn_started:
 		spawn()
@@ -63,9 +67,9 @@ func _physics_process(delta: float) -> void:
 			#SPEED += 5 * delta --- nerfed because it was too fast
 			rotation += get_angle_to(player.position) * 5 * delta
 		
-		if(fly_bx):
-			print("kys")
-			#rotation = random_direction
+		#if(fly_bx):
+			#print("kys")
+			##rotation = random_direction
 		
 		if(kill_bx):
 			rotation += 20 * delta

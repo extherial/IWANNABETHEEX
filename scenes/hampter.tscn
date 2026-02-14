@@ -11,7 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://doiakconpvqbr" path="res://sprites/hampter/hampter6.png" id="8_drtfr"]
 [ext_resource type="Texture2D" uid="uid://cm7v5fdi3u72a" path="res://sprites/hampter/hampter7.png" id="9_sxxok"]
 [ext_resource type="Texture2D" uid="uid://dqpt1vv661q73" path="res://sprites/hampter/hampter8.png" id="10_ehfqb"]
-[ext_resource type="AudioStream" uid="uid://b8r7rejgdr66y" path="res://sounds/fine della vento aureo.mp3" id="12_qkydm"]
+[ext_resource type="AudioStream" uid="uid://w2fl08s15be6" path="res://sounds/fine della vento aureo.mp3" id="12_qkydm"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_8juot"]
 animations = [{
