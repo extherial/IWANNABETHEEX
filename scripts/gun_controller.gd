@@ -9,12 +9,10 @@ func setspawn():
 	var vel = get_parent().velocity
 	SpawnManager.set_spawn(spawn, vel)
 	emit_signal("set_spawn")
-	print(spawn," ", vel)
 	pass
 func shoot(direction: int):
 	var shot = bullet.instantiate()
 	add_child(shot)
 	shot.global_position = Vector2(get_parent().global_position.x + (5 * direction), get_parent().global_position.y + 5.5)
 	shot.dir = direction
-	print("shot: ", direction)
 	pass

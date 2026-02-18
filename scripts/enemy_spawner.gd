@@ -23,7 +23,8 @@ func spawn_enemy(pos: Vector2):
 	var spawn = enemy.instantiate()
 	get_parent().add_child.call_deferred(spawn)
 	spawn.global_position = pos
-	player_death.connect(spawn.death)
+	if(spawn.has_method("death")):
+		player_death.connect(spawn.death)
 	enemy_array.append(spawn)
 	pass
 

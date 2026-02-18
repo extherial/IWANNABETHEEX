@@ -146,13 +146,13 @@ scale = Vector2(0.1, 0.1)
 [node name="Player" type="CharacterBody2D" parent="Node2D" groups=["player"]]
 unique_name_in_owner = true
 z_index = 5
-scale = Vector2(0.8, 0.8)
+scale = Vector2(0.8022864, 0.8546584)
 collision_layer = 248
 collision_mask = 248
+floor_block_on_wall = false
 script = ExtResource("1_mlqkk")
 max_falling_speed = 300
 blood_scene = ExtResource("2_tqiyj")
-jump_pad_strength = -1000
 
 [node name="jump_pad_cooldown" type="Timer" parent="Node2D/Player"]
 

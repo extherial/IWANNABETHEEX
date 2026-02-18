@@ -1,0 +1,101 @@
+[gd_scene load_steps=9 format=3 uid="uid://dqc3a7mx06wkw"]
+
+[ext_resource type="Script" uid="uid://c0hxico5d4p22" path="res://sign.gd" id="1_mbcot"]
+[ext_resource type="Texture2D" uid="uid://d0n4nkhkisuyb" path="res://sprites/misc/sign.png" id="2_w2mlg"]
+[ext_resource type="FontFile" uid="uid://ogmqte8egae2" path="res://fonts/PixelOperatorMono-Bold.ttf" id="4_tbceu"]
+[ext_resource type="FontFile" uid="uid://b7jme5jvytc16" path="res://fonts/PixelOperatorHB.ttf" id="5_e8cgb"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mbcot"]
+size = Vector2(24, 16)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_q3tny"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tbceu"]
+bg_color = Color(0.12591097, 0.12591079, 0.12591088, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_tbceu"]
+
+[node name="Sign" type="Node2D"]
+script = ExtResource("1_mbcot")
+sign_pages = Array[String](["Did you know that you can press [X] to jump?", "P.S. you can also press [C] to jump :)", "P.S.S. you can also also press [Spacebar] to jump :)", "P.S.S.S. you can also also also stop reading this sign at any time!", "P.S.S.S.S at this point it the P S S S S S sounds like a snake", "P.S.S.S.S.S.S? please stop ive lost count of how many s's we are at", "P.S.S.S.S.S.S.S.S :("])
+scroll_speed = 0.8
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_w2mlg")
+
+[node name="Interaction_Area" type="Area2D" parent="."]
+
+[node name="Interaction_area_hitbox" type="CollisionShape2D" parent="Interaction_Area"]
+visible = false
+shape = SubResource("RectangleShape2D_mbcot")
+
+[node name="Indicator_Text" type="Label" parent="Interaction_Area"]
+offset_left = -9.000001
+offset_top = -32.0
+offset_right = 14.999999
+offset_bottom = -16.0
+scale = Vector2(0.75, 0.75)
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("5_e8cgb")
+text = "[E]"
+horizontal_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Textbox" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="MarginContainer" type="MarginContainer" parent="Textbox"]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 80.0
+grow_horizontal = 2
+theme_override_constants/margin_left = 100
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 100
+theme_override_constants/margin_bottom = 10
+
+[node name="Panel" type="Panel" parent="Textbox/MarginContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_q3tny")
+
+[node name="MarginContainer" type="MarginContainer" parent="Textbox/MarginContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="Panel" type="Panel" parent="Textbox/MarginContainer/MarginContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_tbceu")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Textbox/MarginContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="sign_label" type="Label" parent="Textbox/MarginContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme_override_constants/line_spacing = 3
+theme_override_constants/paragraph_spacing = 0
+theme_override_fonts/font = ExtResource("4_tbceu")
+text = "text text ettc dcstgftdgft dfgtsd ftsgdf stdgf tsd   gfffff"
+label_settings = SubResource("LabelSettings_tbceu")
+autowrap_mode = 3
+clip_text = true
+
+[node name="more_text" type="Label" parent="Textbox/MarginContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_fonts/font = ExtResource("4_tbceu")
+theme_override_font_sizes/font_size = 15
+text = "➤ "
+horizontal_alignment = 2
+
+[connection signal="area_entered" from="Interaction_Area" to="." method="_on_interaction_area_area_entered"]
+[connection signal="area_exited" from="Interaction_Area" to="." method="_on_interaction_area_area_exited"]

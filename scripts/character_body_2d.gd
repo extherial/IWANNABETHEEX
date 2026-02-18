@@ -55,11 +55,9 @@ func can_jump():
 func _input(event: InputEvent) -> void:
 	if(event.is_action_pressed("Respawn")):
 		respawn()
-	if(event.is_action_pressed("down")):
+	if(event.is_action_pressed("down") && is_on_floor()):
 		set_collision_mask_value(5, false)
-		print("false")
-	elif(event.is_action_released("down")):
-		print("true")
+		await get_tree().create_timer(0.2).timeout
 		set_collision_mask_value(5, true)
 	pass
 
@@ -70,7 +68,6 @@ func _physics_process(delta: float) -> void:
 #region Jump Logic + Gravity
 		if(!is_on_floor() && double_jump && Input.is_action_just_pressed("jump") && !able_to_jump):
 				$Audio/jump_1.play()
-				print("double jump")
 				velocity.y = JUMP_VELOCITY / 1.2
 				double_jump = false
 		if Input.is_action_just_pressed("jump"):

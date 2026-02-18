@@ -1,0 +1,82 @@
+[gd_scene load_steps=12 format=3 uid="uid://doloavj4l37p4"]
+
+[ext_resource type="Script" uid="uid://dyjt2o4redold" path="res://breakable_platform.gd" id="1_01p1d"]
+[ext_resource type="Texture2D" uid="uid://cr4vmof7u7e54" path="res://sprites/breakable platofrm/breakable platform1.png" id="2_uvi8l"]
+[ext_resource type="Script" uid="uid://bqofhccop5kbw" path="res://static_body_2d.gd" id="3_6n44y"]
+[ext_resource type="Texture2D" uid="uid://dv2w6gq68ayd8" path="res://sprites/breakable platofrm/breakable platform2.png" id="3_bnhtt"]
+[ext_resource type="Texture2D" uid="uid://b164ar8wasfyd" path="res://sprites/breakable platofrm/breakable platform3.png" id="4_bnhtt"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_01p1d"]
+size = Vector2(16, 12.476311)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_8c1a0"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_uvi8l")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_bnhtt")
+}],
+"loop": true,
+"name": &"shaking",
+"speed": 12.0
+}]
+
+[sub_resource type="Curve" id="Curve_bnhtt"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.5603015, 0.77976763), 0.0, 0.0, 0, 0, Vector2(0.9924623, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_8c1a0"]
+curve = SubResource("Curve_bnhtt")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_8c1a0"]
+particle_flag_disable_z = true
+inherit_velocity_ratio = 10.0
+initial_velocity_min = -15.0
+initial_velocity_max = 15.0
+gravity = Vector3(0, 196, 0)
+alpha_curve = SubResource("CurveTexture_8c1a0")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6n44y"]
+size = Vector2(16, 12)
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 57
+collision_mask = 56
+script = ExtResource("1_01p1d")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, 5.7618446)
+shape = SubResource("RectangleShape2D_01p1d")
+
+[node name="platform_sprite" type="AnimatedSprite2D" parent="Area2D"]
+sprite_frames = SubResource("SpriteFrames_8c1a0")
+animation = &"shaking"
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="Area2D"]
+position = Vector2(-4, 0)
+emitting = false
+amount = 2
+texture = ExtResource("4_bnhtt")
+one_shot = true
+explosiveness = 1.0
+use_fixed_seed = true
+seed = 45
+fixed_fps = 15
+process_material = SubResource("ParticleProcessMaterial_8c1a0")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+collision_layer = 16
+collision_mask = 16
+script = ExtResource("3_6n44y")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(0, 6)
+shape = SubResource("RectangleShape2D_6n44y")
+
+[connection signal="area_entered" from="Area2D" to="Area2D" method="_on_area_entered"]
+[connection signal="broken" from="Area2D" to="StaticBody2D" method="_on_area_2d_broken"]
+[connection signal="finished" from="Area2D/GPUParticles2D" to="Area2D" method="_on_gpu_particles_2d_finished"]
